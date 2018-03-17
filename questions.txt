@@ -1,0 +1,58 @@
+let easyQuestions = [
+                {   
+                    question: "Erb e stexcvel hayoc grer@",
+                    variantA: "501",
+                    variantB: "401",
+                    variantC: "361",
+                    variantD: "1",
+                    currectAnswer: "401"
+                },
+                {
+                    question: "Exishe...?",
+                    variantA: "Charenc",
+                    variantB: "Abovyan",
+                    variantC: "Duryan",
+                    variantD: "Sevak",
+                    currectAnswer: "Charenc"
+                },
+                {   
+                    question: "Fransiayi mayraqaxaq@?",
+                    variantA: "Fransia",
+                    variantB: "Paris",
+                    variantC: "Venecia",
+                    variantD: "Moskva",
+                    currectAnswer: "Paris"
+                },
+                {   
+                    question: "4rd kargi aryun?",
+                    variantA: "AB",
+                    variantB: "O",
+                    variantC: "JK",
+                    variantD: "AD",
+                    currectAnswer: "AB"
+                },
+                {   
+                    question: "ov es brat?",
+                    variantA: "es em ",
+                    variantB: "du es ",
+                    variantC: "na e ",
+                    variantD: "esim ov e ",
+                    currectAnswer: "es em "
+                },
+                {   
+                    question: "?????????? ?????? ?????? ? ?????",
+                    variantA: "varA",
+                    variantB: "varB",
+                    variantC: "varC",
+                    variantD: "varD",
+                    currectAnswer: "varD"
+                },
+                {
+                    question:"?????????? ?????? ?????? ? ?????",
+                    variantA: "vaaaarA",
+                    variantB: "vaaaarB",
+                    variantC: "vaaaarC",
+                    variantD: "vaaaarD",
+                    currectAnswer: "vaaaarA"
+                },
+    ]

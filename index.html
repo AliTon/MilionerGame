@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Milioner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+   <input type="button" value="LETS PLAY" onclick="playBtn()" id="buttonElement" ></input>
+   <form id = "myForm">
+           <h3 id="questionLine"></h3>
+           <h4 id="select1" onclick="answer(1)"></h4>
+           <h4 id="select2" onclick="answer(2)"></h4>
+           <h4 id="select3" onclick="answer(3)"></h4>
+           <h4 id="select4" onclick="answer(4)"></h4>  
+           <p id="timer"></p> 
+   </form> 
+   
+   <h1 id = result></h1>
+ <script src="Game.js"></script>
+   
+</body>
+</html>
