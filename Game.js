@@ -57,6 +57,66 @@ var questions = [
                 },
 
 
+],
+ harcer = [
+                {   
+                    question: "Vor@ karoio anunneric che?",
+                    variantA: "marlencho",
+                    variantB: "juju",
+                    variantC: "moxes",
+                    variantD: "Karapet",
+                    currectAnswer: "Karapet"
+                },
+                {
+                    question: "varos varos,me hrashq...?",
+                    variantA: "Tuz",
+                    variantB: "kuz",
+                    variantC: "ghar",
+                    variantD: "kilki",
+                    currectAnswer: "Tuz"
+                },
+                {   
+                    question: "73483+382548325478 = ???",
+                    variantA: "Fransia",
+                    variantB: "6666677777",
+                    variantC: "Venecia",
+                    variantD: "Moskva",
+                    currectAnswer: "6666677777"
+                },
+                {   
+                    question: "4rd kargi aryun?",
+                    variantA: "AB",
+                    variantB: "O",
+                    variantC: "JK",
+                    variantD: "AD",
+                    currectAnswer: "AB"
+                },
+                {   
+                    question: "ov es brat?",
+                    variantA: "patasxanchisht ",
+                    variantB: "du es ",
+                    variantC: "na e ",
+                    variantD: "esim ov e ",
+                    currectAnswer: "patasxanchisht "
+                },
+                {   
+                    question: "?????????? ?????? ?????? ? ?????",
+                    variantA: "varA",
+                    variantB: "??????",
+                    variantC: "varC",
+                    variantD: "varD",
+                    currectAnswer: "??????"
+                },
+                {
+                    question:"?????????? gggaggaggagg ? ?????",
+                    variantA: "vaaaarA",
+                    variantB: "vaaaarB",
+                    variantC: "Patasxan",
+                    variantD: "vaaaarD",
+                    currectAnswer: "Patasxan"
+                },
+
+
 ];
 
 let interval,
@@ -64,96 +124,136 @@ let interval,
     count = 0,
     randomChoseElement = questions[Math.floor(Math.random() * questions.length)];
 
-function startTimer(){
-    let timerElement = document.getElementById("timer");
-    timerElement.innerHTML = time;
-    timerinterval = setInterval(function (){
-        time--;
-        timerElement.innerHTML = time;
-    },1000);
-    time = 30;
-};
 
- function restartGame(){ 
-    var forma = document.getElementById('myForm');
-    forma.parentNode.removeChild(forma);
-    var btn = document.createElement("BUTTON");
-    btn.setAttribute('id','restartgame');
-    btn.addEventListener("click", function(){
-        location.reload()
-    });
+var MyGame = function(questions){
+    this.questions = questions;
+    this.interval;
+    this.timerinterval;
+    this.count = 0;
+    this.time = 30;
+    this.randomChoseElement = this.questions[Math.floor(Math.random() * this.questions.length)];
+    
+        this.nextQuestion = () => {
+           clearInterval(this.timerinterval);
+        this.time = 30;
+        this.startTimer();
+        this.myRan();
+        this.getElement(this.randomChoseElement);
+        this.interval = setTimeout( () => { this.nextQueston() }, 30000)
+   };
+    
+    this.playBtn = () => {
+        this.myRan();
+        this.nextQuestion();
+        var buttonElement = document.getElementById('buttonElement');
+        buttonElement.parentNode.removeChild(buttonElement);
+   };
+    
+ 
     
     
-    var restartBtn = document.createTextNode("Play again");
-    btn.appendChild(restartBtn);
-    document.body.appendChild(btn);
-    document.getElementById("result").innerHTML = `you have ${count} successful answer ${6 - count } wrong `;}
-             
-function getElement(){
-    if(randomChoseElement){
-    document.getElementById("questionLine").innerHTML = randomChoseElement.question;
-    document.getElementById("select1").innerHTML = randomChoseElement.variantA;
-    document.getElementById("select2").innerHTML = randomChoseElement.variantB;
-    document.getElementById("select3").innerHTML = randomChoseElement.variantC;
-    document.getElementById("select4").innerHTML = randomChoseElement.variantD;} 
-};
+    this.myRan = () => {
+         this.randomChoseElement = this.questions[Math.floor(Math.random() * this.questions.length)];
+    if(this.questions.length > 0){
+         for(var i = 0, max = this.questions.length; i < max; i++){
+           if( this.randomChoseElement === this.questions[i] ){
+                              console.log(this.questions);
 
-function playBtn() {
-    myRan();
-    nextQueston();
-    var buttonElement = document.getElementById('buttonElement');
-    buttonElement.parentNode.removeChild(buttonElement);
-   };
-
-function nextQueston(){
-    clearInterval(timerinterval);
-    time = 30;
-    startTimer();
-    myRan();
-    getElement(randomChoseElement);
-    interval = setTimeout(function newanswer(){ nextQueston() }, 30000)
-   };
-
-function myRan(){
-     randomChoseElement = questions[Math.floor(Math.random() * questions.length)];
-    if(questions.length > 0){
-         for(var i = 0, max = questions.length; i < max; i++){
-           if( randomChoseElement === questions[i] ){
-               questions.splice(i, 1)
+               this.questions.splice(i, 1);
            };
        };
-         return randomChoseElement;
-   } else restartGame();
-};
-
-function answer(index){
-    clearTimeout(interval);
-    clearInterval(timerinterval);
+         return this.randomChoseElement;
+   } else this.restartGame();
+    };
     
-    switch(index){
-        case 1:
-            if(randomChoseElement.variantA === randomChoseElement.currectAnswer)
-            { count+=1 ;
-        console.log(count);
+   
+    this.getElement = () => {
+                if(this.randomChoseElement){
+        document.getElementById("questionLine").innerHTML = this.randomChoseElement.question;
+        document.getElementById("select1").innerHTML = this.randomChoseElement.variantA;
+        document.getElementById("select2").innerHTML = this.randomChoseElement.variantB;
+        document.getElementById("select3").innerHTML = this.randomChoseElement.variantC;
+        document.getElementById("select4").innerHTML = this.randomChoseElement.variantD;} 
+    };
+    
+    this.restartGame = () => {
+ 
+            var forma = document.getElementById('myForm');
+            forma.parentNode.removeChild(forma);
+            var btn = document.createElement("BUTTON");
+            btn.setAttribute('id','restartgame');
+            btn.addEventListener("click", function(){
+                location.reload()
+            });
+            var restartBtn = document.createTextNode("Play again");
+            btn.appendChild(restartBtn);
+            document.body.appendChild(btn);
+            document.getElementById("result").innerHTML = `you have ${this.count} successful answer ${6 - this.count } wrong `;
+    };
+
+    this.startTimer = () => {
+                    let timerElement = document.getElementById("timer");
+            timerElement.innerHTML = this.time;
+            this.timerinterval = setInterval(function (){
+                this.time--;
+                timerElement.innerHTML = this.time;
+            },1000);
+            time = 30;
+    };
+    
+    this.answer = (index) => {
+        clearTimeout(this.interval);
+        clearInterval(this.timerinterval);
+
+        switch(index){
+            case 1:
+                if(this.randomChoseElement.variantA === this.randomChoseElement.currectAnswer)
+                { this.count+=1 ;
+            console.log(this.count);
+                };
+                break;
+            case 2:
+                if(this.randomChoseElement.variantB === this.randomChoseElement.currectAnswer)
+               { this.count+=1 ;  
+            console.log(this.count);
+               };
+                break;
+            case 3:
+                if(this.randomChoseElement.variantC === this.randomChoseElement.currectAnswer)
+                { this.count+=1 ; 
+             console.log(this.count);
+                };
+          break;
+            case 4:
+                if(this.randomChoseElement.variantD === this.randomChoseElement.currectAnswer)
+                { this.count+=1 ; 
+            console.log(this.count);
+                } ;
             };
-            break;
-        case 2:
-            if(randomChoseElement.variantB === randomChoseElement.currectAnswer)
-           { count+=1 ;  
-        console.log(count);
-           };
-            break;
-        case 3:
-            if(randomChoseElement.variantC === randomChoseElement.currectAnswer)
-            { count+=1 ; 
-         console.log(count);
-            };
-      break;
-        case 4:
-            if(randomChoseElement.variantD === randomChoseElement.currectAnswer)
-            { count+=1 ; 
-        console.log(count);
-            } ;
-        };
-    nextQueston();
+        this.nextQuestion();
+        }
+    
+    };
+
+
+let initGame = () => {
+   let game = new MyGame(harcer);
+   game.playBtn(); 
+    
+    var btn1 = document.getElementById("select1");
+        btn1.addEventListener("click", function(){
+            game.answer(1)});
+    
+    var btn2 = document.getElementById("select2");
+        btn2.addEventListener("click", function(){
+            game.answer(2)});
+    
+    var btn3= document.getElementById("select3");
+        btn3.addEventListener("click", function(){
+            game.answer(3)});
+    
+   var btn4 = document.getElementById("select4");
+        btn4.addEventListener("click", function(){
+            game.answer(4)});
+    
 };
